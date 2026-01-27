@@ -1,5 +1,5 @@
 
-module.exports = {
+export default {
   content: ["./index.html", "./App.tsx", "./components/**/*.tsx", "./utils.ts", "./constants.ts"],
   theme: {
     extend: {
