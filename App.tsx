@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { GameStatus, ThemeType, Player, GameSettings, GameStats } from './types';
 import { THEME_CONFIG } from './constants';
@@ -181,6 +180,16 @@ const App: React.FC = () => {
     <div className={`min-h-screen transition-colors duration-500 ${currentTheme.bg} ${currentTheme.text} p-4 md:p-8 overflow-x-hidden ${getFontClass()} ${lang === 'zh' ? 'font-chinese' : lang === 'hi' ? 'font-hindi' : 'font-heebo'}`}>
       <div className="max-w-7xl mx-auto flex flex-col gap-8">
         
+        {/* Top Ad Location */}
+        <div className="w-full flex justify-center mb-4 overflow-hidden rounded-xl bg-black/5 min-h-[90px]">
+          <ins className="adsbygoogle"
+               style={{ display: 'block', width: '100%' }}
+               data-ad-client="ca-pub-0274741291001288"
+               data-ad-slot="header-bingo"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+        </div>
+
         <header className="flex flex-col md:flex-row justify-between items-center gap-6" role="banner">
           <div className="text-center md:text-right">
             <h1 className={`font-black tracking-tighter ${getFontClass()}`}>{t.title}</h1>
@@ -240,32 +249,44 @@ const App: React.FC = () => {
                   </div>
                 </div>
               </div>
-              <button onClick={() => { speak(t.play); startGame(); }} className="mt-4 w-full py-5 rounded-2xl font-black text-2xl bg-indigo-600 text-white hover:bg-indigo-700 transition-all shadow-xl">{t.play}</button>
+              <button onClick={() => { speak(t.play); startGame(); }} className="mt-4 w-full py-5 rounded-2xl font-black text-2xl bg-indigo-600 text-white hover:bg-indigo-700 transition-all shadow-xl active:scale-95">{t.play}</button>
             </main>
 
-            <aside className={`${currentTheme.card} border-2 p-8 rounded-3xl shadow-xl flex flex-col gap-6`}>
-              <h2 className="text-xl font-bold border-b border-slate-200/20 pb-4">{t.stats}</h2>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="p-4 rounded-2xl bg-slate-500/10 text-center">
-                  <div className="text-2xl font-black">{stats.totalGames}</div>
-                  <div className="text-xs opacity-60 font-bold uppercase">{t.games}</div>
+            <aside className="flex flex-col gap-8">
+              <div className={`${currentTheme.card} border-2 p-8 rounded-3xl shadow-xl flex flex-col gap-6`}>
+                <h2 className="text-xl font-bold border-b border-slate-200/20 pb-4">{t.stats}</h2>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="p-4 rounded-2xl bg-slate-500/10 text-center">
+                    <div className="text-2xl font-black">{stats.totalGames}</div>
+                    <div className="text-xs opacity-60 font-bold uppercase">{t.games}</div>
+                  </div>
+                  <div className="p-4 rounded-2xl bg-slate-500/10 text-center">
+                    <div className="text-2xl font-black">{stats.totalGames > 0 ? formatDuration(stats.totalDurationMs / stats.totalGames) : "0:00"}</div>
+                    <div className="text-xs opacity-60 font-bold uppercase">{t.avgDur}</div>
+                  </div>
                 </div>
-                <div className="p-4 rounded-2xl bg-slate-500/10 text-center">
-                  <div className="text-2xl font-black">{stats.totalGames > 0 ? formatDuration(stats.totalDurationMs / stats.totalGames) : "0:00"}</div>
-                  <div className="text-xs opacity-60 font-bold uppercase">{t.avgDur}</div>
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center p-3 bg-indigo-500/10 rounded-xl">
+                    <span className="font-bold">{t.humanWins}:</span>
+                    <span className="text-xl font-black text-indigo-500">{stats.humanWins}</span>
+                  </div>
+                  <div className="flex justify-between items-center p-3 bg-purple-500/10 rounded-xl">
+                    <span className="font-bold">{t.compWins}:</span>
+                    <span className="text-xl font-black text-purple-500">{stats.computerWins}</span>
+                  </div>
                 </div>
+                <button onClick={() => confirm(t.reset + '?') && setStats({totalGames:0, humanWins:0, computerWins:0, totalDurationMs:0, recentWinners:[]})} className="mt-auto text-xs opacity-40 hover:opacity-100 hover:text-red-500 transition-all font-bold">{t.reset}</button>
               </div>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center p-3 bg-indigo-500/10 rounded-xl">
-                  <span className="font-bold">{t.humanWins}:</span>
-                  <span className="text-xl font-black text-indigo-500">{stats.humanWins}</span>
-                </div>
-                <div className="flex justify-between items-center p-3 bg-purple-500/10 rounded-xl">
-                  <span className="font-bold">{t.compWins}:</span>
-                  <span className="text-xl font-black text-purple-500">{stats.computerWins}</span>
-                </div>
+
+              {/* Sidebar Ad Location */}
+              <div className="w-full bg-black/5 rounded-2xl min-h-[250px] flex items-center justify-center overflow-hidden">
+                <ins className="adsbygoogle"
+                     style={{ display: 'block' }}
+                     data-ad-client="ca-pub-0274741291001288"
+                     data-ad-slot="sidebar-bingo"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
               </div>
-              <button onClick={() => confirm(t.reset + '?') && setStats({totalGames:0, humanWins:0, computerWins:0, totalDurationMs:0, recentWinners:[]})} className="mt-auto text-xs opacity-40 hover:opacity-100 hover:text-red-500 transition-all font-bold">{t.reset}</button>
             </aside>
           </div>
         ) : (
@@ -312,6 +333,16 @@ const App: React.FC = () => {
             </div>
           </div>
         )}
+
+        {/* Bottom Ad Location */}
+        <div className="w-full flex justify-center mt-8 bg-black/5 rounded-xl min-h-[90px] overflow-hidden">
+          <ins className="adsbygoogle"
+               style={{ display: 'block', width: '100%' }}
+               data-ad-client="ca-pub-0274741291001288"
+               data-ad-slot="footer-bingo"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+        </div>
 
         <footer className="mt-auto py-8 text-center opacity-40 text-sm">
           <p>© Noam Gold AI 2026 | <a href="mailto:goldnoamai@gmail.com" className="hover:underline">Send Feedback</a></p>
